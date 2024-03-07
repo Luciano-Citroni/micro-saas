@@ -1,0 +1,4 @@
+GET http://localhost:3000/users/get/all HTTP/1.1
+###
+
+GET http://localhost:3000/users/get/a7342692-02ee-4c82-829f-650e47c6af73 HTTP/1.1
