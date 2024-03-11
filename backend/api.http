@@ -2,3 +2,31 @@ GET http://localhost:3000/users/get/all HTTP/1.1
 ###
 
 GET http://localhost:3000/users/get/a7342692-02ee-4c82-829f-650e47c6af73 HTTP/1.1
+###
+
+POST http://localhost:3000/users/create HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Luciano Citroni",
+    "email": "luciano@email.com.br"
+}
+
+###
+
+POST http://localhost:3000/todo/create HTTP/1.1
+Content-Type: application/json
+x-user-id: a7342692-02ee-4c82-829f-650e47c6af73
+
+{
+    "title": "Minha primeira tarefa"
+}
+
+
+###
+
+POST http://localhost:3000/checkout/create HTTP/1.1
+Content-Type: application/json
+x-user-id: a7342692-02ee-4c82-829f-650e47c6af73
+
+

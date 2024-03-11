@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../../lib/prisma';
+import { createStripeCustomer } from '../../lib/stripe';
 
 export class UsersController {
     async listUsersController(request: Request, response: Response) {
@@ -24,5 +25,42 @@ export class UsersController {
         }
 
         response.send(users);
+    }
+
+    async createUser(request: Request, response: Response) {
+        const { name, email } = request.body;
+
+        if (!name || !email) {
+            return response.status(400).send({
+                error: 'Name or Email is invalid',
+            });
+        }
+
+        const usersEmailAlreadyExists = await prisma.user.findUnique({
+            where: {
+                email: email,
+            },
+            select: {
+                id: true,
+            },
+        });
+
+        if (usersEmailAlreadyExists) {
+            return response.status(400).send({
+                error: 'Email already in use',
+            });
+        }
+
+        const customer = await createStripeCustomer({ email: email, name: name });
+
+        const user = await prisma.user.create({
+            data: {
+                name,
+                email,
+                stripeCostomerId: customer.id,
+            },
+        });
+
+        response.send(user);
     }
 }
