@@ -52,11 +52,11 @@ export const createCheckoutSession = async (userID: string, userEmail: string) =
     }
 };
 
-export const handleProcessWebhookCheckout = async (event: { object: Stripe.Checkout.Session }) => {
-    const clientRefecenceId = event.object.client_reference_id;
-    const stripeSubscriptionId = event.object.subscription as string;
-    const stripeCostomerId = event.object.customer as string;
-    const checkoutStatus = event.object.status;
+export const handleProcessWebhookCheckout = async (event: { data: { object: Stripe.Checkout.Session } }) => {
+    const clientRefecenceId = event.data.object.client_reference_id;
+    const stripeSubscriptionId = event.data.object.subscription as string;
+    const stripeCostomerId = event.data.object.customer as string;
+    const checkoutStatus = event.data.object.status;
 
     if (checkoutStatus != 'complete') return;
 
@@ -82,16 +82,17 @@ export const handleProcessWebhookCheckout = async (event: { object: Stripe.Check
             id: userExists.id,
         },
         data: {
-            stripeCostomerId,
-            stripeSubscriptionId,
+            stripeCostomerId: stripeCostomerId,
+            stripeSubscriptionId: stripeSubscriptionId,
+            stripeSubscriptionStatus: checkoutStatus,
         },
     });
 };
 
-export const handleProcessWebhookUpdatedSubscription = async (event: { object: Stripe.Subscription }) => {
-    const subscriptionStatus = event.object.status;
-    const stripeCostomerId = event.object.customer as string;
-    const stripeSubscriptionId = event.object.id as string;
+export const handleProcessWebhookUpdatedSubscription = async (event: { data: { object: Stripe.Subscription } }) => {
+    const subscriptionStatus = event.data.object.status;
+    const stripeCostomerId = event.data.object.customer as string;
+    const stripeSubscriptionId = event.data.object.id as string;
 
     const userExists = await prisma.user.findFirst({
         where: {

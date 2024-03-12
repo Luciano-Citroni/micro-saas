@@ -33,11 +33,14 @@ export class StripeController {
             switch (event.type) {
                 case 'checkout.session.completed':
                     await handleProcessWebhookCheckout(event);
-                case 'checkout.subscription.created':
-                case 'checkout.subscription.updated':
+                    break;
+                case 'customer.subscription.created':
+
+                case 'customer.subscription.updated':
                     await handleProcessWebhookUpdatedSubscription(event);
+                    break;
                 default:
-                    console.log('Unhandle event type: ', event.type);
+                    console.log('Unhandle event type: ', `-${event.type}-`);
             }
 
             return response.json({ received: true });

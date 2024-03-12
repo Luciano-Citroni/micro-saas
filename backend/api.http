@@ -8,18 +8,18 @@ POST http://localhost:3000/users/create HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Luciano Citroni",
-    "email": "luciano@email.com.br"
+    "name": "Luciano Citroni Lopes",
+    "email": "luciano.citroni@email.com.br"
 }
 
 ###
 
 POST http://localhost:3000/todo/create HTTP/1.1
 Content-Type: application/json
-x-user-id: a7342692-02ee-4c82-829f-650e47c6af73
+x-user-id: 39418028-b3ba-4ffe-9e1e-0c2a067b914a
 
 {
-    "title": "Minha primeira tarefa"
+    "title": "Task 5"
 }
 
 
@@ -27,6 +27,6 @@ x-user-id: a7342692-02ee-4c82-829f-650e47c6af73
 
 POST http://localhost:3000/checkout/create HTTP/1.1
 Content-Type: application/json
-x-user-id: a7342692-02ee-4c82-829f-650e47c6af73
+x-user-id: 80beb148-afe2-4f39-8824-16c93bcb6e34
 
 
