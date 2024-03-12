@@ -19,7 +19,7 @@ Content-Type: application/json
 x-user-id: 39418028-b3ba-4ffe-9e1e-0c2a067b914a
 
 {
-    "title": "Task 5"
+    "title": "Task 7"
 }
 
 
@@ -27,6 +27,6 @@ x-user-id: 39418028-b3ba-4ffe-9e1e-0c2a067b914a
 
 POST http://localhost:3000/checkout/create HTTP/1.1
 Content-Type: application/json
-x-user-id: 80beb148-afe2-4f39-8824-16c93bcb6e34
+x-user-id: 39418028-b3ba-4ffe-9e1e-0c2a067b914a
 
 
