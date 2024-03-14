@@ -10,7 +10,7 @@ export function DashboardPage({ children, className }: DashboardPageGenericProps
 }
 
 export function DashboardPageHeader({ children, className }: DashboardPageGenericProps) {
-    return <header className={cn(['px-6 py-5 border-b border-border', className])}>{children}</header>;
+    return <header className={cn(['px-6 py-5 border-b border-border flex items-center justify-between', className])}>{children}</header>;
 }
 
 export function DashboardPageHeaderTitle({ children, className }: DashboardPageGenericProps) {

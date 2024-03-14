@@ -60,10 +60,11 @@ model VerificationToken {
 }
 
 model Todo {
-    id       String   @id @default(cuid())
+    id       String    @id @default(cuid())
     title    String
-    user     User     @relation(fields: [userId], references: [id])
+    user     User      @relation(fields: [userId], references: [id])
     userId   String
-    createAt DateTime @default(now())
-    updateAt DateTime @updatedAt
+    createAt DateTime  @default(now())
+    updateAt DateTime  @updatedAt
+    doneAt   DateTime?
 }
