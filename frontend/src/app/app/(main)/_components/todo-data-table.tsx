@@ -30,70 +30,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Todo } from '../types';
 import { useRouter } from 'next/navigation';
-
-export const columns: ColumnDef<Todo>[] = [
-    {
-        accessorKey: 'title',
-        header: ({ column }) => {
-            return (
-                <Button variant="link" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                    Title
-                    <CaretSortIcon className="ml-2 h-4 w-4" />
-                </Button>
-            );
-        },
-        cell: ({ row }) => <div>{row.getValue('title')}</div>,
-    },
-    {
-        accessorKey: 'createAt',
-        header: () => <div className="text-center">createAt</div>,
-        cell: ({ row }) => {
-            return <div className="text-center font-medium">{row.original.createAt.toLocaleDateString()}</div>;
-        },
-    },
-    {
-        accessorKey: 'status',
-        header: () => <div className="text-center">Status</div>,
-        cell: ({ row }) => {
-            const { doneAt } = row.original;
-            const status: 'done' | 'waiting' = doneAt ? 'done' : 'waiting';
-            const variant: 'outline' | 'secondary' = doneAt ? 'outline' : 'secondary';
-
-            return (
-                <div className="flex justify-center items-center">
-                    <Badge variant={variant} className="text-center">
-                        {status}
-                    </Badge>
-                </div>
-            );
-        },
-    },
-    {
-        id: 'actions',
-        enableHiding: false,
-        cell: ({ row }) => {
-            const todo = row.original;
-
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="link" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <DotsHorizontalIcon className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem onClick={() => navigator.clipboard.writeText(todo.id)}>Copy Todo ID</DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Mark as done</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            );
-        },
-    },
-];
+import { deleteTodo, upsertTodo } from '../actions';
+import { toast } from '@/components/ui/use-toast';
 
 type TodoDataTableProps = {
     data: Todo[];
@@ -107,8 +45,91 @@ export function TodoDataTable({ data }: TodoDataTableProps) {
 
     const router = useRouter();
 
-    function handleDeleteToto(todo: Todo) {}
-    function handleToggledDoneTodo(todo: Todo) {}
+    async function handleDeleteTodo(todo: Todo) {
+        await deleteTodo({ id: todo.id });
+
+        router.refresh();
+        toast({
+            title: 'Deletion Successful',
+            description: 'The todo item has been successully deleted',
+        });
+    }
+
+    async function handleToggledDoneTodo(todo: Todo) {
+        const doneAt = todo.doneAt ? null : new Date();
+
+        await upsertTodo({ id: todo.id, doneAt });
+
+        router.refresh();
+        toast({
+            title: 'Update Successful',
+            description: 'The todo item has been successully updated',
+        });
+    }
+
+    const columns: ColumnDef<Todo>[] = [
+        {
+            accessorKey: 'title',
+            header: ({ column }) => {
+                return (
+                    <Button variant="link" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+                        Title
+                        <CaretSortIcon className="ml-2 h-4 w-4" />
+                    </Button>
+                );
+            },
+            cell: ({ row }) => <div>{row.getValue('title')}</div>,
+        },
+        {
+            accessorKey: 'createAt',
+            header: () => <div className="text-center">createAt</div>,
+            cell: ({ row }) => {
+                return <div className="text-center font-medium">{row.original.createAt.toLocaleDateString()}</div>;
+            },
+        },
+        {
+            accessorKey: 'status',
+            header: () => <div className="text-center">Status</div>,
+            cell: ({ row }) => {
+                const { doneAt } = row.original;
+                const status: 'done' | 'waiting' = doneAt ? 'done' : 'waiting';
+                const variant: 'outline' | 'secondary' = doneAt ? 'outline' : 'secondary';
+
+                return (
+                    <div className="flex justify-center items-center">
+                        <Badge variant={variant} className="text-center">
+                            {status}
+                        </Badge>
+                    </div>
+                );
+            },
+        },
+        {
+            id: 'actions',
+            enableHiding: false,
+            cell: ({ row }) => {
+                const todo = row.original;
+
+                return (
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="link" className="h-8 w-8 p-0">
+                                <span className="sr-only">Open menu</span>
+                                <DotsHorizontalIcon className="h-4 w-4" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(todo.id)}>Copy Todo ID</DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={() => handleToggledDoneTodo(todo)}>Mark as done</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleDeleteTodo(todo)}>Delete</DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                );
+            },
+        },
+    ];
 
     const table = useReactTable({
         data,
