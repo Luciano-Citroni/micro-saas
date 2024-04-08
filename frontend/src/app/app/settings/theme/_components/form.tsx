@@ -19,7 +19,7 @@ export function ThemeForm() {
     const form = useForm<z.infer<typeof themeFormSchema>>({
         resolver: zodResolver(themeFormSchema),
         defaultValues: {
-            theme: theme.theme ?? 'light',
+            theme: theme.theme,
         },
     });
 
