@@ -14,13 +14,13 @@ export function SettingsSidebar() {
             <SidebarNav>
                 <SidebarNavMain>
                     <SidebarNavLink href="/app/settings" active={isActive('/app/settings')}>
-                        My profile
+                        Perfil
                     </SidebarNavLink>
                     <SidebarNavLink href="/app/settings/theme" active={isActive('/app/settings/theme')}>
-                        Theme
+                        Thema
                     </SidebarNavLink>
                     <SidebarNavLink href="/app/settings/billing" active={isActive('/app/settings/billing')}>
-                        Billing
+                        Planos
                     </SidebarNavLink>
                 </SidebarNavMain>
             </SidebarNav>

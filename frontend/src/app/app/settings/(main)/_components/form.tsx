@@ -35,7 +35,7 @@ export function ProfileForm({ defaultValue }: ProfileFormProps) {
 
         toast({
             title: 'Success',
-            description: 'Your profile has been updated successfully.',
+            description: 'Seu perfil foi atualizado com sucesso!.',
         });
     });
 
@@ -44,8 +44,8 @@ export function ProfileForm({ defaultValue }: ProfileFormProps) {
             <form onSubmit={onSubmit} className="space-y-8 ">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Name</CardTitle>
-                        <CardDescription>This will be the publicly displayed name for your account</CardDescription>
+                        <CardTitle>Nome</CardTitle>
+                        <CardDescription>Coloque seu nome aqui</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <FormField
@@ -55,7 +55,7 @@ export function ProfileForm({ defaultValue }: ProfileFormProps) {
                                 <FormItem>
                                     <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Enter your name" {...field} />
+                                        <Input placeholder="Coloque seu nome" {...field} />
                                     </FormControl>
 
                                     <FormMessage />
@@ -68,7 +68,7 @@ export function ProfileForm({ defaultValue }: ProfileFormProps) {
                 <Card>
                     <CardHeader>
                         <CardTitle>Email</CardTitle>
-                        <CardDescription>Please contact email contact@micro-saas.com to chance the email</CardDescription>
+                        <CardDescription>Caso queira mudar o email, entre em contato por: contact@micro-saas.com</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <FormField
@@ -78,7 +78,7 @@ export function ProfileForm({ defaultValue }: ProfileFormProps) {
                                 <FormItem>
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Enter your email" {...field} readOnly />
+                                        <Input placeholder="Coloque seu email" {...field} readOnly />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -89,8 +89,8 @@ export function ProfileForm({ defaultValue }: ProfileFormProps) {
 
                 <SheetFooter className="mt-auto">
                     <Button disabled={form.formState.isLoading} type="submit">
-                        {form.formState.isSubmitting && 'Saving....'}
-                        {!form.formState.isSubmitting && 'Save changes'}
+                        {form.formState.isSubmitting && 'Salvando....'}
+                        {!form.formState.isSubmitting && 'Salvar'}
                     </Button>
                 </SheetFooter>
             </form>

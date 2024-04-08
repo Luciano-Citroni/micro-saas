@@ -1,7 +1,5 @@
+import { ThemeForm } from './_components/form';
+
 export default function ThemaPage() {
-    return (
-        <div>
-            <h1>Thema</h1>
-        </div>
-    );
+    return <ThemeForm />;
 }
