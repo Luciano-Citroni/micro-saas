@@ -16,7 +16,6 @@ import {
 } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
@@ -50,8 +49,8 @@ export function TodoDataTable({ data }: TodoDataTableProps) {
 
         router.refresh();
         toast({
-            title: 'Deletion Successful',
-            description: 'The todo item has been successully deleted',
+            title: 'Excluido com sucesso',
+            description: 'A tarefa foi excluida com sucesso!',
         });
     }
 
@@ -62,8 +61,8 @@ export function TodoDataTable({ data }: TodoDataTableProps) {
 
         router.refresh();
         toast({
-            title: 'Update Successful',
-            description: 'The todo item has been successully updated',
+            title: 'Atualizado com sucesso',
+            description: 'A tarefa foi alterada com sucesso!',
         });
     }
 
@@ -73,7 +72,7 @@ export function TodoDataTable({ data }: TodoDataTableProps) {
             header: ({ column }) => {
                 return (
                     <Button variant="link" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                        Title
+                        Titulo
                         <CaretSortIcon className="ml-2 h-4 w-4" />
                     </Button>
                 );
@@ -82,7 +81,7 @@ export function TodoDataTable({ data }: TodoDataTableProps) {
         },
         {
             accessorKey: 'createAt',
-            header: () => <div className="text-center">createAt</div>,
+            header: () => <div className="text-center">Data Criado</div>,
             cell: ({ row }) => {
                 return <div className="text-center font-medium">{row.original.createAt.toLocaleDateString()}</div>;
             },
@@ -114,16 +113,16 @@ export function TodoDataTable({ data }: TodoDataTableProps) {
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="link" className="h-8 w-8 p-0">
-                                <span className="sr-only">Open menu</span>
+                                <span className="sr-only">Abrir Menu</span>
                                 <DotsHorizontalIcon className="h-4 w-4" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(todo.id)}>Copy Todo ID</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(todo.id)}>Copiar ID</DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem onClick={() => handleToggledDoneTodo(todo)}>Mark as done</DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => handleDeleteTodo(todo)}>Delete</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleToggledDoneTodo(todo)}>Concluir Tarefa</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleDeleteTodo(todo)}>Excluir</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 );

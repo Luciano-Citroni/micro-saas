@@ -18,7 +18,7 @@ export default async function AppPage() {
                     <TodoUpsertSheet>
                         <Button variant="outline" size="sm">
                             <PlusIcon className="w-4 h-4 mr-3" />
-                            Add Todo
+                            Adicionar Tarefa
                         </Button>
                     </TodoUpsertSheet>
                 </DashboardPageHeaderNav>

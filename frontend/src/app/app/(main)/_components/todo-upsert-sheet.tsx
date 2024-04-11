@@ -33,8 +33,8 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
         ref.current?.click();
 
         toast({
-            title: 'Success',
-            description: 'Your todo has been updated successfully.',
+            title: 'Cadastrado com sucesso',
+            description: 'A tarefa foi cadastrada com sucesso!',
         });
     });
 
@@ -47,9 +47,9 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
                 <Form {...form}>
                     <form onSubmit={onSubmit} className="space-y-8 h-screen ">
                         <SheetHeader>
-                            <SheetTitle>Upsert Todo</SheetTitle>
+                            <SheetTitle>Cadastrar Tarefa</SheetTitle>
 
-                            <SheetDescription>Add or edit todo item here. Click save when you re done.</SheetDescription>
+                            <SheetDescription>Adicione ou edite um item de tarefa aqui. Clique em salvar quando terminar.</SheetDescription>
                         </SheetHeader>
 
                         <FormField
@@ -57,18 +57,18 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
                             name="title"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Title</FormLabel>
+                                    <FormLabel>Titulo</FormLabel>
                                     <FormControl>
                                         <Input placeholder="Enter your todo title" {...field} />
                                     </FormControl>
-                                    <FormDescription>This will be the publicly displayed name for the task.</FormDescription>
+                                    <FormDescription>Este será o nome da sua tarefa.</FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
 
                         <SheetFooter className="mt-auto">
-                            <Button type="submit">Save changes</Button>
+                            <Button type="submit">Salvar</Button>
                         </SheetFooter>
                     </form>
                 </Form>

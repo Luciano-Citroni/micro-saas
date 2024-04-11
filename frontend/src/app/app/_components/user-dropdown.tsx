@@ -49,13 +49,13 @@ export function UserDropdown({ user }: MainUserDropdown) {
                     </DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer">
                         <RocketIcon className="w-4 h-4 mr-3" />
-                        Upgrade
+                        Planos
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
                     <ExitIcon className="w-4 h-4 mr-3" />
-                    Log out
+                    Logout
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
