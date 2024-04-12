@@ -1,8 +1,8 @@
 export const config = {
     stripe: {
-        publishedKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISEDKEY as string,
-        secretKey: process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string,
-        webhook_secret: process.env.STRIPE_WEBHOOKSECRET as string,
+        publishedKey: process.env.STRIPE_PUBLISEDKEY as string,
+        secretKey: process.env.STRIPE_SECRET_KEY as string,
+        webhook_secret: process.env.STRIPE_WEBHOOK_SECRET as string,
         plans: {
             free: {
                 priceId: 'price_1P4T2vLVx0xg3ul0IdCGfXPT',

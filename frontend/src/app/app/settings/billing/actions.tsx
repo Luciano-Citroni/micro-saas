@@ -14,7 +14,7 @@ export async function createCheckoutSessionAction() {
         };
     }
 
-    const sessionCheckout = await createCheckoutSession(session.user.id, session.user.email as string);
+    const sessionCheckout = await createCheckoutSession(session.user.id, session.user.email as string, session.user.stripeSubscriptionId as string);
 
     if (!sessionCheckout.url) return;
 
